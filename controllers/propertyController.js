@@ -271,24 +271,29 @@ const getproperties = async (req, res) => {
       properties.map(async (property) => {
         if (!property.images_folder) return [];
         const folderName = new URL(property.images_folder).pathname.substring(1);
+        console.log("get3",folderName);
 
         const listParams = {
           Bucket: process.env.AWSS3_BUCKET_NAME,
           Prefix: folderName,
         };
+        console.log("get4",listParams);
 
         const listedObjects = await s3.listObjectsV2(listParams).promise();
+        console.log("get5",listedObjects);
         return listedObjects.Contents.map((object) =>
           `https://${process.env.AWSS3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${object.Key}`
         );
       })
     );
+    console.log("get6",imageResults);
 
     // Attach images to their respective properties
     const propertiesWithImages = properties.map((property, index) => ({
       ...property,
       images: imageResults[index] || [],
     }));
+    console.log("get7",propertiesWithImages);
 
     // Total properties count (optional: could be fetched with a separate query)
     //const countSql = `SELECT COUNT(*) AS total FROM dyn_properties WHERE (property_id IS NULL OR property_id = ?) AND (user_id IS NULL OR user_id = ?)`;
@@ -296,9 +301,9 @@ const getproperties = async (req, res) => {
 
 
     const [countResult] = await db.query(countSql);
-    console.log("get3",countResult);
+    console.log("get8",countResult);
     const totalProperties = countResult[0]?.total || 0;
-    console.log("get4",totalProperties);
+    console.log("get9",totalProperties);
 
     res.status(200).json({
       message: 'Properties retrieved successfully',

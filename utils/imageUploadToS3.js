@@ -3,6 +3,7 @@ const sharp = require('sharp'); // Import sharp for image resizing
 
 // Initialize the AWS S3 instance
 const s3 = new AWS.S3();
+const moment=require("moment");
 
 /**
  * Upload multiple images to AWS S3 after resizing them
@@ -13,7 +14,11 @@ const s3 = new AWS.S3();
  */
 const uploadImagesToS3 = async (files, propertyId) => {
   const timestamp = Date.now(); // Unique timestamp for better organization
-  const folderName = `property-images/${propertyId}`; // Folder based on propertyId
+  //const currentMomentWithMilliseconds = moment(timestamp);
+  //const currentDateAndTime=currentMomentWithMilliseconds.format("YYYY-MM-DD HH:mm:ss.SSSZ");
+  //const folderName = `property-images/${propertyId}`; // Folder based on propertyId
+  //const folderName = `property-images/${currentDateAndTime}`; // Folder based on
+  const folderName = `property-images/${timestamp}`; // Folder based on current
 
   console.log("Folder Name:", folderName);
 

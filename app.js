@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const userRoutes=require('./routes/userRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
-const staTablesRoutes=require('./routes/staTablesRoutes');
+const stTablesRoutes=require('./routes/stTablesRoutes');
 //const db = require('./config/db');
 
 dotenv.config();
@@ -22,8 +22,7 @@ app.use('/api', propertyRoutes);
 
 app.use('/api',userRoutes);
 
-app.use('/api',staTablesRoutes);
-
+app.use('/api',stTablesRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
