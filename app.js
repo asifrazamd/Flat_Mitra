@@ -2,9 +2,10 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const userRoutes=require('./routes/userRoutes');
-const propertyRoutes = require('./routes/propertyRoutes');
+//const userRoutes=require('./routes/userRoutes');
+//const propertyRoutes = require('./routes/propertyRoutes');
 const stTablesRoutes=require('./routes/stTablesRoutes');
+const authRoutes=require('./routes/authRoutes');
 //const db = require('./config/db');
 
 dotenv.config();
@@ -18,11 +19,13 @@ app.use(express.json());
 
 
 // Register the routes
-app.use('/api', propertyRoutes);
+//app.use('/api', propertyRoutes);
 
-app.use('/api',userRoutes);
+//app.use('/api',userRoutes);
 
 app.use('/api',stTablesRoutes);
+
+app.use('/api',authRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
