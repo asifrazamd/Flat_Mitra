@@ -28,6 +28,7 @@ const getBuildersListBasedOnCityId=async(req,res)=>{
     const {city_id}=req.query
     try{
         const [builders_list]=await db.query(`call get_bulders_list_based_on_cityId(?)`,[city_id])
+        console.log(builders_list)
         return res.status(200).json(builders_list[0])
     }
     catch(error){
@@ -45,63 +46,52 @@ const getCommunitiesListBasedOnBuilderId=async(req,res)=>{
     }
   }
 
-const getStaticTablesData = async (req, res) => {
+
+
+
+
+  const getStaticTablesData = async (req, res) => {
     try {
-      const queries = [
-        'GetDepositRanges',
-        'GetConversationModes',
-        'GetBedrooms',
-        'GetBathrooms',
-        'GetBalconies',
-        'GetFloorRanges',
-        'GetHomeTypes',
-        'GetPropertyDescriptions',
-        'GetPropertyTypes',
-        'GetRentalRanges',
-        'GetTenantEatPreferences',
-        'GetTenantTypes',
-      ];
-  
       const dbConnection = await db.getConnection();
       await dbConnection.beginTransaction();
   
       try {
-        const results = await Promise.all(
-          queries.map((query) =>
-            dbConnection.query(`CALL ${query}`).then((result) => result[0][0]),
-          ),
-        );
-  
+        // Call the single stored procedure
+        const [results] = await dbConnection.query('CALL getStaticTables()');
+        console.log("results",results);
         await dbConnection.commit();
   
+        // Map the results to meaningful keys
         const [
-          depositeRangeList,
-          conversationModesList,
-          bedroomsList,
-          bathroomsList,
-          balconiesList,
-          floorRangesList,
-          homeTypesList,
-          propertyDescriptionList,
-          propertyTypesList,
-          rentalRangesList,
-          tenantEatPreferencesList,
-          tenantTypesList,
+          prop_type_list,
+          home_type_list,
+          property_description_list,
+          bedrooms_list,
+          bathrooms_list,
+          balcony_list,
+          tenant_type_list,
+          tenant_eat_prefence_list,
+          rental_range_list,
+          parking_type_list,
+          parking_count_list,
+          deposit_range_list,
+          gender_preference_list
         ] = results;
   
         const result = {
-          depositeRangeList,
-          conversationModesList,
-          bedroomsList,
-          bathroomsList,
-          balconiesList,
-          floorRangesList,
-          homeTypesList,
-          propertyDescriptionList,
-          propertyTypesList,
-          rentalRangesList,
-          tenantEatPreferencesList,
-          tenantTypesList,
+          prop_type_list,
+          home_type_list,
+          property_description_list,
+          bedrooms_list,
+          bathrooms_list,
+          balcony_list,
+          tenant_type_list,
+          tenant_eat_prefence_list,
+          rental_range_list,
+          parking_type_list,
+          parking_count_list,
+          deposit_range_list,
+          gender_preference_list
         };
   
         return res.status(200).json(result);
@@ -118,8 +108,5 @@ const getStaticTablesData = async (req, res) => {
     }
   };
   
-  
 
-
-
-module.exports={getAllStateList,getCityListBasedOnStateId,getBuildersListBasedOnCityId,getCommunitiesListBasedOnBuilderId,getStaticTablesData};
+module.exports={getAllStateList, getCityListBasedOnStateId,getBuildersListBasedOnCityId,getCommunitiesListBasedOnBuilderId,getStaticTablesData};

@@ -1,27 +1,28 @@
 const express = require('express');
 const multer = require('multer');
-const { createProperty, getproperties, deleteproperty,updateproperty } = require('../controllers/propertyController');
-//const { validateProperty } = require('../models/propertyValidator');
+const { createProperty, getProperties, getAllProperties} = require('../controllers/propertyController');
 
 const router = express.Router();
 
 const storage = multer.memoryStorage();
-console.log(storage);
+//console.log(storage);
 const upload = multer({ storage });
-console.log(upload);
+//console.log(upload);
 
-router.post(
+ router.post(
   '/upload-property',
-  upload.array('images'),createProperty);
-// Get Properties Route (all or specific by ID)
-router.get('/properties', getproperties); // Fetch properties
+   upload.array('images'),createProperty);
+router.get('/properties1', getAllProperties); // Fetch properties
+
+router.get('/properties', getProperties); // Fetch properties
+
 
 
 // Set up DELETE route to delete property
-router.delete('/properties/:id', deleteproperty);  // Make sure the `id` is used correctly
+//router.delete('/properties/:id', deleteProperty);  // Make sure the `id` is used correctly
 
 // Set up the PUT route for updating the property
-router.put('/properties/:property_id', updateproperty); // Update route
+//router.put('/properties/:property_id', updateProperty); // Update route
 
 
 

@@ -3,7 +3,7 @@ const sharp = require('sharp'); // For image resizing
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 
-const uploadImagesToS3 = async (files, propertyId) => {
+const uploadImagesToS3 = async (files) => {
   const timestamp = Date.now();
   const folderName = `property-images/${timestamp}`;
 
@@ -30,7 +30,7 @@ const uploadImagesToS3 = async (files, propertyId) => {
   try {
     await Promise.all(uploadImagePromises);
     const folderUrl = `https://${process.env.AWSS3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${folderName}/`;
-    console.log("Folder URL:", folderUrl);
+    //console.log("Folder URL:", folderUrl);
     return folderUrl;
   } catch (error) {
     console.error('Error during batch upload:', error);
