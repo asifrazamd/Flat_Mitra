@@ -11,14 +11,12 @@ const s3Client = new S3Client({ region: process.env.AWS_REGION });
 const createProperty = async (req, res) => {
   const dbConnection = await db.getConnection(); // Assuming a DB connection pool
   try {
-    console.log("Processing createProperty request...");
 
     // Upload images to S3 if provided
     const folderUrl = req.files?.length
       ? await uploadImagesToS3(req.files)
       : Null;
 
-    console.log("S3 Folder URL:", folderUrl);
 
     // Parse property data from request body
     const propertyData = JSON.parse(req.body.data);
@@ -48,7 +46,6 @@ const createProperty = async (req, res) => {
     ];
 
     // Execute stored procedure
-    console.log("Calling stored procedure with params:", params);
     await dbConnection.query('CALL CreateProperty(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', params);
 
     return res.status(201).json({
@@ -115,16 +112,12 @@ const getProperties = async (req, res) => {
     }));*/
 
     // Fetch total properties count
-    const countSql = `SELECT COUNT(*) as total FROM dy_property`;
-    const [countResult] = await db.query(countSql);
-    const totalProperties = countResult[0]?.total || 0;
     const properties1 = properties.map((property, index) => ({
       ...property,
     }));
 
     res.status(200).json({
       message: 'Properties retrieved successfully',
-      //totalProperties,
       page: parseInt(page),
       limit: parseInt(limit),
       properties: properties1,
@@ -152,9 +145,7 @@ const getAllProperties = async (req, res) => {
       parseInt(limit),
     ]);
 
-    console.log("below");
     const properties = result[0];
-    console.log("properties",properties);
     if (!properties.length) {
       return res.status(404).json({ message: 'No properties found' });
     }
