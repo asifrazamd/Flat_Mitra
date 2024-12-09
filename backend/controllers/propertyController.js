@@ -123,9 +123,17 @@ const getAllProperties = async (req, res) => {
     // Check Redis cache first
     let cachedData = await redis.get('AllPropertiesData');
     if (cachedData) {
+      const totalProperties=JSON.parse(cachedData).length
       cachedData = JSON.parse(cachedData).slice(offset, offset + parseInt(limit));
       
-      return res.status(200).json((cachedData[0]));
+      return res.status(200).json({
+        message: 'Properties retrieved successfully',
+        totalProperties,
+        page: parseInt(page),
+        limit: parseInt(limit),
+        properties: cachedData,
+  
+      });
     }
 
 
@@ -146,6 +154,44 @@ const getAllProperties = async (req, res) => {
     }
 
     properties = properties.slice(offset, offset + parseInt(limit));
+
+  
+
+    // Fetch images for each property
+    /*const imageResults = await Promise.all(
+      properties.map(async (property) => {
+        console.log("images_location:", property.images_location);
+
+        if (!property.images_location) return [];
+        const folderName = new URL(property.images_location).pathname.substring(1);
+        console.log("folderName",folderName);
+
+        const listParams = {
+          Bucket: process.env.AWSS3_BUCKET_NAME,
+          Prefix: folderName,
+        };
+        console.log("list",listParams);
+
+
+        const command = new ListObjectsV2Command(listParams);
+        const listedObjects = await s3Client.send(command);
+
+        return (listedObjects.Contents || []).map((object) =>
+          https://${process.env.AWSS3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${object.Key}
+        );
+      })
+    );
+    console.log("imageResults",imageResults);
+
+    // Attach images to properties
+    const propertiesWithImages = properties.map((property, index) => ({
+      ...property,
+      images: imageResults[index] || [],
+    }));
+    console.log("propertiesWithImages",propertiesWithImages);*/
+
+    
+
     res.status(200).json({
       message: 'Properties retrieved successfully',
       totalProperties,
@@ -153,6 +199,7 @@ const getAllProperties = async (req, res) => {
       limit: parseInt(limit),
       properties: properties,
 
+      //properties: propertiesWithImages,
     });
   } catch (error) {
     console.error('Error retrieving properties:', error);
