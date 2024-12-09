@@ -4,7 +4,7 @@ USE `propman`;
 --
 -- Host: localhost    Database: propman
 -- ------------------------------------------------------
--- Server version	8.0.40
+-- Server version	9.1.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -173,7 +173,7 @@ CREATE TABLE `dy_property` (
   CONSTRAINT `prop_fk_tenant_eat_pref_id` FOREIGN KEY (`tenant_eat_pref_id`) REFERENCES `st_tenant_eat_pref` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `prop_fk_tenant_type_id` FOREIGN KEY (`tenant_type_id`) REFERENCES `st_tenant` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `prop_fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `dy_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table for Property Data';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table for Property Data';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `dy_property` (
 
 LOCK TABLES `dy_property` WRITE;
 /*!40000 ALTER TABLE `dy_property` DISABLE KEYS */;
-INSERT INTO `dy_property` VALUES (2,1,1,2,3,4,3,2,1,1,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733475881446/',NULL,NULL),(3,1,1,2,3,4,3,2,1,1,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477289398/',NULL,NULL),(4,1,1,2,3,4,3,2,1,1,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477831708/','2024-12-06 09:37:13','2024-12-06 09:37:13'),(5,1,1,2,3,4,3,2,1,1,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733481956969/','2024-12-06 10:45:58','2024-12-06 10:45:58');
+INSERT INTO `dy_property` VALUES (2,1,1,2,1,1,1,1,1,1,2,1,1,1,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733475881446/',NULL,'2024-12-09 05:03:25'),(3,1,2,3,2,2,2,2,2,2,2,1,2,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477289398/',NULL,'2024-12-09 05:02:02'),(4,1,3,4,3,3,3,3,3,3,2,1,3,3,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477831708/','2024-12-06 09:37:13','2024-12-09 05:03:25'),(5,1,4,5,4,4,4,4,4,4,2,1,2,4,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733481956969/','2024-12-06 10:45:58','2024-12-09 05:03:25'),(6,1,5,6,1,5,5,5,5,5,2,1,3,5,3,1,'2025-01-01 00:00:00',NULL,5,3,5,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733718324657/','2024-12-09 04:25:27','2024-12-09 05:03:25');
 /*!40000 ALTER TABLE `dy_property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1312,4 +1312,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09  9:20:13
+-- Dump completed on 2024-12-09 10:35:35

@@ -121,7 +121,7 @@ const getAllProperties = async (req, res) => {
   try {
     const offset = (page - 1) * limit;
     // Check Redis cache first
-    let cachedData = await redis.get(`AllPropertiesData`);
+    let cachedData = await redis.get('AllPropertiesData');
     if (cachedData) {
       cachedData = JSON.parse(cachedData).slice(offset, offset + parseInt(limit));
       
@@ -137,7 +137,7 @@ const getAllProperties = async (req, res) => {
     let properties = result[0];
 
     // Cache the data in Redis for 1 hour
-    await redis.set(`AllPropertiesData`, JSON.stringify(properties), 'EX', 3600);
+    await redis.set('AllPropertiesData', JSON.stringify(properties), 'EX', 3600);
 
     const totalProperties=properties.length
 
