@@ -4,6 +4,8 @@ const cors = require('cors'); // Middleware for enabling Cross-Origin Resource S
 const dotenv = require('dotenv'); // Module for loading environment variables from a .env file
 const propertyRoutes = require('./routes/propertyRoutes'); // Routes for property-related endpoints
 const stTablesRoutes = require('./routes/stTablesRoutes'); // Routes for other table-related endpoints
+const authRoutes=require('./routes/authRoutes');
+
 
 // Load environment variables from .env file
 dotenv.config();
@@ -29,6 +31,9 @@ app.use('/api', propertyRoutes);
 
 // Routes for managing static tables, also prefixed with /api
 app.use('/api', stTablesRoutes);
+
+app.use('/api',authRoutes);
+
 
 // Start the server and listen for incoming requests on the specified port
 app.listen(PORT, () => {

@@ -1,6 +1,5 @@
 // Import necessary modules
 const express = require('express'); // For creating a router instance
-const multer = require('multer');  // For handling file uploads
 
 // Import controller functions for property-related operations
 const { 
@@ -12,9 +11,6 @@ const {
 // Create a new router instance for property-related routes
 const router = express.Router();
 
-// Configure multer for file uploads (using in-memory storage)
-const storage = multer.memoryStorage(); // Stores uploaded files in memory as Buffer objects
-const upload = multer({ storage });    // Initialize multer with the configured storage
 
 // Define routes for property-related operations
 
@@ -25,8 +21,7 @@ const upload = multer({ storage });    // Initialize multer with the configured 
  * @middleware multer.array('images') - Handles multiple image uploads with the field name 'images'
  * @controller createProperty
  */
-router.post('/upload-property', upload.array('images'), createProperty);
-
+router.post('/upload-property', createProperty);
 /**
  * @route GET /api/properties1
  * @description Retrieve all properties with pagination

@@ -1,5 +1,3 @@
-const { S3Client, ListObjectsV2Command, DeleteObjectsCommand } = require('@aws-sdk/client-s3');
-const { uploadImagesToS3 } = require('../utils/imageUploadToS3'); // S3 upload utility
 const db = require('../config/db'); // Database connection
 const dotenv = require('dotenv');
 const { redis } = require("../config/redis");
@@ -7,22 +5,13 @@ const { redis } = require("../config/redis");
 // Load environment variables
 dotenv.config();
 
-// Initialize S3 client
-const s3Client = new S3Client({ region: process.env.AWS_REGION });
 
 
 const createProperty = async (req, res) => {
   const dbConnection = await db.getConnection(); // Assuming a DB connection pool
   try {
 
-    // Upload images to S3 if provided
-    const folderUrl = req.files?.length
-      ? await uploadImagesToS3(req.files)
-      : Null;
-
-
-    // Parse property data from request body
-    const propertyData = JSON.parse(req.body.data);
+    const propertyData = (req.body);
 
     // Prepare stored procedure parameters
     const params = [
@@ -45,15 +34,13 @@ const createProperty = async (req, res) => {
       propertyData.tower_no,
       propertyData.floor_no,
       propertyData.flat_no,
-      folderUrl, // S3 folder URL as images_location
     ];
 
     // Execute stored procedure
-    await dbConnection.query(`CALL CreateProperty(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, params);
+    await dbConnection.query('CALL CreateProperty(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', params);
 
     return res.status(201).json({
       message: 'Property created successfully',
-      images_location: folderUrl,
     });
   } catch (error) {
     console.error("Error in createProperty:", error);
@@ -107,7 +94,6 @@ const getPropertyDetails = async (req, res) => {
 
     res.status(200).json(
       properties[0]
-      //properties: propertiesWithImages,
     );
   } catch (error) {
     console.error('Error retrieving properties:', error);
@@ -154,9 +140,6 @@ const getAllProperties = async (req, res) => {
     }
 
     properties = properties.slice(offset, offset + parseInt(limit));
-
-  
-
    
 
     res.status(200).json({

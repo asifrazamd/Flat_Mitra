@@ -173,7 +173,7 @@ CREATE TABLE `dy_property` (
   CONSTRAINT `prop_fk_tenant_eat_pref_id` FOREIGN KEY (`tenant_eat_pref_id`) REFERENCES `st_tenant_eat_pref` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `prop_fk_tenant_type_id` FOREIGN KEY (`tenant_type_id`) REFERENCES `st_tenant` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `prop_fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `dy_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table for Property Data';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table for Property Data';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `dy_property` (
 
 LOCK TABLES `dy_property` WRITE;
 /*!40000 ALTER TABLE `dy_property` DISABLE KEYS */;
-INSERT INTO `dy_property` VALUES (2,1,1,2,1,1,1,1,1,1,2,1,1,1,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733475881446/',NULL,'2024-12-09 05:03:25'),(3,1,2,3,2,2,2,2,2,2,2,1,2,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477289398/',NULL,'2024-12-09 05:02:02'),(4,1,3,4,3,3,3,3,3,3,2,1,3,3,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477831708/','2024-12-06 09:37:13','2024-12-09 05:03:25'),(5,1,4,5,4,4,4,4,4,4,2,1,2,4,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733481956969/','2024-12-06 10:45:58','2024-12-09 05:03:25'),(6,1,5,6,1,5,5,5,5,5,2,1,3,5,3,1,'2025-01-01 00:00:00',NULL,5,3,5,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733718324657/','2024-12-09 04:25:27','2024-12-09 05:03:25');
+INSERT INTO `dy_property` VALUES (2,1,1,2,1,1,1,1,1,1,2,1,1,1,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733475881446/',NULL,'2024-12-09 05:03:25'),(3,1,2,3,2,2,2,2,2,2,2,1,2,2,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477289398/',NULL,'2024-12-09 05:02:02'),(4,1,3,4,3,3,3,3,3,3,2,1,3,3,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733477831708/','2024-12-06 09:37:13','2024-12-09 05:03:25'),(5,1,4,5,4,4,4,4,4,4,2,1,2,4,3,1,'2025-01-01 00:00:00',NULL,1,2,3,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733481956969/','2024-12-06 10:45:58','2024-12-09 05:03:25'),(6,1,5,6,1,5,5,5,5,5,2,1,3,5,3,1,'2025-01-01 00:00:00',NULL,5,3,5,'https://raza1.s3.us-east-1.amazonaws.com/property-images/1733718324657/','2024-12-09 04:25:27','2024-12-09 05:03:25'),(7,1,2,3,1,2,3,2,1,1,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,5,3,5,NULL,'2024-12-09 06:57:08','2024-12-09 06:57:08'),(8,1,1,3,2,3,5,3,2,2,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,5,3,5,NULL,'2024-12-09 07:04:34','2024-12-09 07:04:34'),(9,1,1,3,3,7,5,3,2,2,2,1,1,2,3,1,'2025-01-01 00:00:00',NULL,5,3,5,NULL,'2024-12-09 07:04:57','2024-12-09 07:04:57');
 /*!40000 ALTER TABLE `dy_property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +204,7 @@ CREATE TABLE `dy_user` (
   `ref_code` varchar(10) DEFAULT NULL,
   `mobile_verified` tinyint DEFAULT '0',
   `email_verified` tinyint DEFAULT '0',
-  `passwd` varchar(45) DEFAULT NULL,
+  `passwd` varchar(512) DEFAULT NULL,
   `reconfirm_passwd` varchar(45) DEFAULT NULL,
   `passwd_exp_time` varchar(45) DEFAULT NULL,
   `signuptime` datetime DEFAULT NULL,
@@ -218,7 +218,7 @@ CREATE TABLE `dy_user` (
   CONSTRAINT `fk_gender_id` FOREIGN KEY (`gender_id`) REFERENCES `st_gender` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_perm_id` FOREIGN KEY (`permission_id`) REFERENCES `st_permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `st_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +227,7 @@ CREATE TABLE `dy_user` (
 
 LOCK TABLES `dy_user` WRITE;
 /*!40000 ALTER TABLE `dy_user` DISABLE KEYS */;
-INSERT INTO `dy_user` VALUES (1,'auth0_id_123','John Doe','john.doe@example.com','1234567890',1,1,'REF123',1,1,'password123','password123','2024-12-06 12:00:59','2024-12-06 12:05:00',1,'2024-12-06 12:10:00');
+INSERT INTO `dy_user` VALUES (1,'auth0_id_123','John Doe','john.doe@example.com','1234567890',1,1,'REF123',1,1,'password123','password123','2024-12-06 12:00:59','2024-12-06 12:05:00',1,'2024-12-06 12:10:00'),(2,NULL,'Asif','mdasifraza820@gmail.com',NULL,2,1,NULL,0,0,'$2b$05$lRV.ymMOMIjJG6VCVhG3c./Eosa2yrhXrNt92AAY.E9oTStKPcwcy',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `dy_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1049,22 +1049,46 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateProperty`(
     IN availabl_date DATE,
     IN tower_no INT,
     IN floor_no INT,
-    IN flat_no INT,
-    IN images_location VARCHAR(255)
+    IN flat_no INT
+   -- IN images_location VARCHAR(255)
 )
 BEGIN
     INSERT INTO dy_property (
         user_id, prop_type_id, home_type_id, prop_desc_id, community_id,
         no_beds, no_baths, no_balconies, tenant_type_id, tenant_eat_pref_id,
         rental_range_id, parking_type_id, parking_count_id, deposit_range_id,
-        gender_pref, availabl_date, tower_no, floor_no, flat_no, images_location
+        gender_pref, availabl_date, tower_no, floor_no, flat_no -- images_location
     )
     VALUES (
         user_id, prop_type_id, home_type_id, prop_desc_id, community_id,
         no_beds, no_baths, no_balconies, tenant_type_id, tenant_eat_pref_id,
         rental_range_id, parking_type_id, parking_count_id, deposit_range_id,
-        gender_pref, availabl_date, tower_no, floor_no, flat_no, images_location
+        gender_pref, availabl_date, tower_no, floor_no, flat_no -- images_location
     );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CreateUser` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser`(
+    IN username VARCHAR(255),
+    IN email VARCHAR(255),
+    IN hashedPassword VARCHAR(255)
+)
+BEGIN
+    INSERT INTO dy_user (user_name, email_id, passwd) 
+    VALUES (username, email, hashedPassword);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1096,6 +1120,27 @@ BEGIN
     SELECT * FROM st_parking_count;
     SELECT * FROM st_deposit_range;
     SELECT * FROM st_gender;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetUserByEmail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserByEmail`(
+    IN emailId VARCHAR(255)
+)
+BEGIN
+    SELECT * FROM dy_user WHERE email_id = emailId LIMIT 1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1312,4 +1357,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09 10:35:35
+-- Dump completed on 2024-12-09 12:40:15
