@@ -24,10 +24,10 @@ app.use(express.json());
 
 // Register API routes
 
-// Property-related API routes, prefixed with `/api`
+// Property-related API routes, prefixed with /api
 app.use('/api', propertyRoutes);
 
-// Routes for managing static tables, also prefixed with `/api`
+// Routes for managing static tables, also prefixed with /api
 app.use('/api', stTablesRoutes);
 
 // Start the server and listen for incoming requests on the specified port

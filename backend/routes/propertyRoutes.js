@@ -5,7 +5,7 @@ const multer = require('multer');  // For handling file uploads
 // Import controller functions for property-related operations
 const { 
   createProperty,   // Controller for creating a property with optional image uploads
-  getProperties,    // Controller for retrieving specific properties
+  getPropertyDetails,    // Controller for retrieving specific properties
   getAllProperties  // Controller for retrieving all properties with pagination
 } = require('../controllers/propertyController');
 
@@ -33,7 +33,7 @@ router.post('/upload-property', upload.array('images'), createProperty);
  * @access Public
  * @controller getAllProperties
  */
-router.get('/properties1', getAllProperties);
+router.get('/getAllProperties', getAllProperties);
 
 /**
  * @route GET /api/properties
@@ -41,7 +41,7 @@ router.get('/properties1', getAllProperties);
  * @access Public
  * @controller getProperties
  */
-router.get('/properties', getProperties);
+router.get('/propertyDetails', getPropertyDetails);
 
 // Export the router to be used in the main application file
 module.exports = router;

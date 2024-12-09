@@ -4,7 +4,7 @@ USE `propman`;
 --
 -- Host: localhost    Database: propman
 -- ------------------------------------------------------
--- Server version	9.1.0
+-- Server version	8.0.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1112,13 +1112,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_properties`(
--- IN input_property_id INT,   -- Input parameter for filtering by a specific property ID
-    -- IN input_user_id INT,       -- Input parameter for filtering by a specific user ID
-    IN input_offset INT,        -- Offset for pagination
-    IN input_limit INT          -- Limit for pagination
-
-)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_properties`()
 BEGIN
 
 SELECT 
@@ -1155,8 +1149,7 @@ SELECT
                 LEFT JOIN st_rental_range srrh ON dy.rental_range_id = srrh.id
                 LEFT JOIN  st_parking_type spat ON dy.parking_type_id = spat.id
                 LEFT JOIN st_parking_count spc ON dy.parking_count_id = spc.id
-                LEFT JOIN st_deposit_range sdr ON dy.deposit_range_id = sdr.id
-				LIMIT input_limit OFFSET input_offset;  -- Pagination applied here
+                LEFT JOIN st_deposit_range sdr ON dy.deposit_range_id = sdr.id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1319,4 +1312,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-07 12:46:11
+-- Dump completed on 2024-12-09  9:20:13
